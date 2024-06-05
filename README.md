@@ -1,2 +1,2 @@
-Generate Random Student ID and PIN
-Bypass Basic Image Captcha
+- Generate Random Student ID and PIN
+- Bypass Basic Image Captcha
