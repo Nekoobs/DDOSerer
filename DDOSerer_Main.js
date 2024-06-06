@@ -24,7 +24,7 @@
 
   const AlwaysLogout = true;
 
-  const MinStudentID = 51500;
+  const MinStudentID = 51400;
   const MaxStudentID = 53000;
 
   const GeneratorEnabled = true;
@@ -166,7 +166,7 @@
 	} else if (mainLists.includes(currentUrl)) {
 	  Logger("On main page, performing actions...");
 	  PopulateFields();
-	  if (Generator) {
+	  if (GeneratorEnabled) {
 		setInterval(AutoSubmit, GeneratorInterval);
 	  }
 	}
