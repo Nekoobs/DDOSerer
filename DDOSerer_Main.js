@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         DDOSerer
-// @version      3.1.2
+// @version      3.1.4
 // @author       Peemai545
 // @description  Completely Rewritten!
 // @namespace    http://tampermonkey.net/
@@ -11,19 +11,14 @@
 // @require      https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4
 // ==/UserScript==
 
-(function () {
+(function(){
   "use strict";
 
   const mainLists = ["https://skr.webactivity.online/student/"];
-  const registerLists = [
-	"https://skr.webactivity.online/student/register_main.php",
-  ];
-  const logoutLists = [
-	"https://skr.webactivity.online/student/register_logout.php",
-  ];
+  const registerLists = ["https://skr.webactivity.online/student/register_main.php",];
+  const logoutLists = ["https://skr.webactivity.online/student/register_logout.php",];
 
   const AlwaysLogout = true;
-
   const MinStudentID = 51400;
   const MaxStudentID = 53000;
 
@@ -32,24 +27,11 @@
 
   const DebuggerEnabled = false;
 
-  function Logger(message) {
-	if (DebuggerEnabled) {
-	  console.log(message);
-	}
-  }
-  function GetRandomNumber(min, max) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  function Logger(message){if (DebuggerEnabled) {console.log(message);}}
+  function GetRandomNumber(min, max){return Math.floor(Math.random() * (max - min + 1)) + min;}
 
-  async function GenerateRandomStudentID() {
-	try {
-	  const randomValue = GetRandomNumber(MinStudentID, MaxStudentID);
-	  return randomValue;
-	} catch (error) {
-	  Logger("Error generating random student ID:", error);
-	  throw error;
-	}
-  }
+  async function GenerateRandomStudentID(){
+  try {const randomValue = GetRandomNumber(MinStudentID, MaxStudentID);return randomValue;} catch (error) {Logger("Error generating random student ID:", error);throw error;}}
 
   async function DecodeCaptcha() {
 	try {
@@ -72,28 +54,17 @@
 	}
   }
 
-  async function PopulateFields() {
+  async function Inputter() {
 	try {
 	  const studentID = await GenerateRandomStudentID();
 	  const captchaValue = await DecodeCaptcha();
 
-	  const studentIDInput = document.querySelector(
-		'input[placeholder="เลขประจำตัวนักเรียน 5 หลัก"]'
-	  );
-	  const passwordInput = document.querySelector(
-		'input[placeholder="รหัสผ่านที่โรงเรียนกำหนด"]'
-	  );
-	  const captchaInput = document.querySelector(
-		'input[placeholder="พิมพ์ตัวเลขที่ปรากฏ"]'
-	  );
+	  const studentIDInput = document.querySelector('input[placeholder="เลขประจำตัวนักเรียน 5 หลัก"]');
+	  const passwordInput = document.querySelector('input[placeholder="รหัสผ่านที่โรงเรียนกำหนด"]');
+	  const captchaInput = document.querySelector('input[placeholder="พิมพ์ตัวเลขที่ปรากฏ"]');
 
-	  if (studentIDInput && studentID) {
-		studentIDInput.value = studentID;
-	  } else {
-		throw new Error(
-		  "Error: Student ID input field not found or student ID is empty!"
-		);
-	  }
+	  if (studentIDInput && studentID){studentIDInput.value = studentID;
+	  } else {throw new Error("Error: Student ID input field not found or student ID is empty!");}
 
 	  if (passwordInput && studentID) {
 		passwordInput.value = studentID;
@@ -111,26 +82,20 @@
 		);
 	  }
 	} catch (error) {
-	  Logger("Error populating fields:", error);
+	  Logger("Error inputting fields:", error);
 	  throw error;
 	}
   }
 
   async function AutoSubmit() {
 	try {
-	  const studentIDInput = document.querySelector(
-		'input[placeholder="เลขประจำตัวนักเรียน 5 หลัก"]'
-	  );
-	  const passwordInput = document.querySelector(
-		'input[placeholder="รหัสผ่านที่โรงเรียนกำหนด"]'
-	  );
+	  const studentIDInput = document.querySelector('input[placeholder="เลขประจำตัวนักเรียน 5 หลัก"]');
+	  const passwordInput = document.querySelector('input[placeholder="รหัสผ่านที่โรงเรียนกำหนด"]');
 	  const captchaInput = document.getElementById("inCaptcha");
 
 	  if (!studentIDInput.value || !passwordInput.value) {
-		Logger(
-		  "Student ID or password input field is empty. Generating ID and PIN..."
-		);
-		await PopulateFields();
+		Logger("Student ID or password input field is empty. Generating ID and PIN...");
+		await Inputter();
 	  }
 
 	  if (!captchaInput || captchaInput.value.trim() === "") {
@@ -138,11 +103,9 @@
 		const captchaValue = await DecodeCaptcha();
 		if (captchaValue) {
 		  captchaInput.value = captchaValue;
-		  Logger("Captcha decoded and populated.");
+		  Logger("Captcha decoded and inputted.");
 		} else {
-		  throw new Error(
-			"Error decoding captcha or decoded captcha is empty."
-		  );
+		  throw new Error("Error decoding captcha or decoded captcha is empty.");
 		}
 	  }
 
@@ -165,15 +128,12 @@
 	  }
 	} else if (mainLists.includes(currentUrl)) {
 	  Logger("On main page, performing actions...");
-	  PopulateFields();
+	  Inputter();
 	  if (GeneratorEnabled) {
 		setInterval(AutoSubmit, GeneratorInterval);
 	  }
 	}
   }
 
-  window.addEventListener("load", () => {
-	Logger("Page Loaded.");
-	CheckAndPerformActions();
-  });
+  window.addEventListener("load", () => {Logger("Page Loaded.");CheckAndPerformActions();});
 })();
