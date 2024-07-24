@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         DDOSerer
-// @version      3.1.4
+// @version      3.1.5a
 // @author       Peemai545
 // @description  Completely Rewritten!
 // @namespace    http://tampermonkey.net/
@@ -123,15 +123,11 @@
 	const currentUrl = window.location.href;
 	if (registerLists.includes(currentUrl)) {
 	  Logger("On register main page, performing actions...");
-	  if (AlwaysLogout) {
-		window.location.href = logoutLists[0];
-	  }
+	  if (AlwaysLogout) {window.location.href = logoutLists[0];}
 	} else if (mainLists.includes(currentUrl)) {
 	  Logger("On main page, performing actions...");
 	  Inputter();
-	  if (GeneratorEnabled) {
-		setInterval(AutoSubmit, GeneratorInterval);
-	  }
+	  if (GeneratorEnabled) {setInterval(AutoSubmit, GeneratorInterval);}
 	}
   }
 
