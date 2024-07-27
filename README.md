@@ -6,11 +6,11 @@
 - [Support](#support)
 - [Lite Version](#lite-version)
 
-![Static Badge](https://img.shields.io/badge/Made_in-Userscripts-black?style=for-the-badge)
-![MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
-![Maintained](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=for-the-badge)
-![GitHub contributors](https://img.shields.io/github/contributors/Nekoobs/DDOSerer?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/Nekoobs/DDOSerer?style=for-the-badge)
+![MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge) ![Maintained](https://img.shields.io/badge/Maintained%3F-yes-orange.svg?style=for-the-badge)  
+![Static Badge](https://img.shields.io/badge/Made_in-Javascript-yellow?style=for-the-badge) ![Static Badge](https://img.shields.io/badge/For-userscript-black?style=for-the-badge)  
+![Performance](https://img.shields.io/badge/Performance-UNOptimized-red?style=for-the-badge) ![Compatibility](https://img.shields.io/badge/Compatibility-Cross%20Platform-blue?style=for-the-badge)  
+![GitHub contributors](https://img.shields.io/github/contributors/Nekoobs/DDOSerer?style=for-the-badge) ![GitHub issues](https://img.shields.io/github/issues/Nekoobs/DDOSerer?style=for-the-badge)  
+
 # DDOSerer
 **DDOSerer** is a script designed to automate form submissions with functionalities like CAPTCHA decoding and random ID generation.
 ## Installation
